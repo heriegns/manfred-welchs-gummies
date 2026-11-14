@@ -1,0 +1,138 @@
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes softPop {
+  0% {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -240px 0;
+  }
+
+  100% {
+    background-position: 240px 0;
+  }
+}
+
+.screen.active-screen {
+  animation: riseIn 0.35s ease both;
+}
+
+.panel,
+.metric-card,
+.welcome-card,
+.form-card {
+  animation: softPop 0.4s ease both;
+}
+
+.primary-button,
+.secondary-button,
+.nav-button,
+.report-tab,
+.icon-button,
+.text-button,
+.record-action {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.nav-button:hover,
+.report-tab:hover,
+.icon-button:hover,
+.text-button:hover,
+.record-action:hover {
+  transform: translateY(-2px);
+}
+
+.list-item {
+  animation: riseIn 0.3s ease both;
+}
+
+.progress-fill {
+  background-size: 240px 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+
+.form-message.success {
+  animation: softPop 0.3s ease both;
+}
+
+.record-item {
+  align-items: flex-start;
+}
+
+.record-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+}
+
+.record-action {
+  border: none;
+  border-radius: 999px;
+  padding: 7px 10px;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.edit-action {
+  background: rgba(42, 157, 143, 0.15);
+  color: var(--accent);
+}
+
+.delete-action {
+  background: rgba(214, 69, 80, 0.14);
+  color: var(--danger);
+}
+
+@media (max-width: 420px) {
+  .record-item {
+    flex-direction: column;
+  }
+
+  .record-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

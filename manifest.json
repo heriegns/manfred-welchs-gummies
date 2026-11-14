@@ -1,0 +1,17 @@
+{
+  "name": "Welch's Gummies Tracker",
+  "short_name": "Gummies Tracker",
+  "description": "A simple offline business tracker for Welch's gummies sales at KNUST.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f3f7f5",
+  "theme_color": "#176b45",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

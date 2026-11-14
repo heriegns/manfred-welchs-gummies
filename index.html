@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#176b45">
+  <meta name="description" content="Welch's Gummies business tracker">
+  <title>Welch's Gummies Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">KNUST business tracker</p>
+      <h1>Welch's Gummies</h1>
+    </div>
+    <button id="theme-toggle" class="icon-button" type="button" aria-label="Toggle dark mode">☾</button>
+  </header>
+
+  <main>
+    <section id="home-screen" class="screen active-screen">
+      <div class="welcome-card">
+        <div>
+          <p class="eyebrow">Today</p>
+          <h2 id="today-date">Loading date...</h2>
+          <p id="evening-banner" class="muted-text">Keep your sales record up to date.</p>
+        </div>
+        <span id="status-badge" class="status-badge status-on-track">On track</span>
+      </div>
+
+      <div class="metrics-grid">
+        <article class="metric-card">
+          <span>Today's sales</span>
+          <strong id="today-sales">GHC 0.00</strong>
+        </article>
+        <article class="metric-card">
+          <span>Today's profit</span>
+          <strong id="today-profit" class="profit-text">GHC 0.00</strong>
+        </article>
+        <article class="metric-card">
+          <span>Week profit</span>
+          <strong id="week-profit" class="profit-text">GHC 0.00</strong>
+        </article>
+        <article class="metric-card">
+          <span>Total profit</span>
+          <strong id="total-profit" class="profit-text">GHC 0.00</strong>
+        </article>
+        <article class="metric-card">
+          <span>Pieces in stock</span>
+          <strong id="stock-count">0</strong>
+        </article>
+        <article class="metric-card">
+          <span>Daily streak</span>
+          <strong id="daily-streak">0 days</strong>
+        </article>
+      </div>
+
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Weekly target</p>
+            <h2><span id="weekly-pieces">0</span> / <span id="weekly-target-pieces">630</span> pieces</h2>
+          </div>
+          <span id="weekly-target-boxes">0 / 7 boxes</span>
+        </div>
+        <div class="progress-track">
+          <div id="weekly-progress" class="progress-fill"></div>
+        </div>
+        <p id="weekly-progress-text" class="muted-text">Start logging sales to track your week.</p>
+      </article>
+
+      <article class="panel quick-actions">
+        <h2>Quick actions</h2>
+        <button class="primary-button navigate-button" type="button" data-screen="sell-screen">＋ Log a sale</button>
+        <button class="secondary-button navigate-button" type="button" data-screen="expenses-screen">＋ Add an expense</button>
+      </article>
+
+      <article class="panel">
+        <div class="panel-heading">
+          <h2>Money rule</h2>
+          <button class="text-button navigate-button" type="button" data-screen="settings-screen">Edit</button>
+        </div>
+        <div class="money-rule-grid">
+          <div>
+            <span>Restock</span>
+            <strong id="restock-amount">GHC 0.00</strong>
+          </div>
+          <div>
+            <span>Savings</span>
+            <strong id="savings-amount">GHC 0.00</strong>
+          </div>
+          <div>
+            <span>Safe to spend</span>
+            <strong id="personal-amount">GHC 0.00</strong>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="sell-screen" class="screen">
+      <div class="screen-heading">
+        <p class="eyebrow">Fast entry</p>
+        <h2>Log a sale</h2>
+        <p class="muted-text">Record a sale in a few seconds.</p>
+      </div>
+
+      <form id="sale-form" class="form-card">
+        <label for="sale-pieces">Pieces sold</label>
+        <input id="sale-pieces" name="pieces" type="number" min="1" inputmode="numeric" placeholder="For example, 5" required>
+
+        <label for="sale-price">Price per piece (GHC)</label>
+        <input id="sale-price" name="price" type="number" min="0" step="0.01" value="5" required>
+
+        <label for="sale-location">KNUST location</label>
+        <select id="sale-location" name="location" required>
+          <option value="">Choose a location</option>
+          <option value="Hostels">Hostels</option>
+          <option value="Lecture halls">Lecture halls</option>
+          <option value="Canteen">Canteen</option>
+          <option value="Fellowship events">Fellowship events</option>
+          <option value="Library area">Library area</option>
+        </select>
+
+        <label for="sale-time">Time of day</label>
+        <select id="sale-time" name="timeOfDay" required>
+          <option value="Morning">Morning</option>
+          <option value="Afternoon" selected>Afternoon</option>
+          <option value="Evening">Evening</option>
+          <option value="Night">Night</option>
+        </select>
+
+        <label for="sale-payment">Payment type</label>
+        <div class="choice-grid">
+          <label class="choice-button">
+            <input type="radio" name="payment" value="Cash" checked>
+            <span>Cash</span>
+          </label>
+          <label class="choice-button">
+            <input type="radio" name="payment" value="MoMo">
+            <span>MoMo</span>
+          </label>
+        </div>
+
+        <button class="primary-button" type="submit">Save sale</button>
+        <p id="sale-message" class="form-message" role="status"></p>
+      </form>
+    </section>
+
+    <section id="expenses-screen" class="screen">
+      <div class="screen-heading">
+        <p class="eyebrow">Money out</p>
+        <h2>Expenses</h2>
+        <p class="muted-text">Track purchases and business costs.</p>
+      </div>
+
+      <form id="expense-form" class="form-card">
+        <label for="expense-amount">Amount (GHC)</label>
+        <input id="expense-amount" name="amount" type="number" min="0.01" step="0.01" placeholder="For example, 310" required>
+
+        <label for="expense-category">Category</label>
+        <select id="expense-category" name="category" required>
+          <option value="Box purchase">Box purchase</option>
+          <option value="Transport">Transport</option>
+          <option value="Data">Data</option>
+          <option value="Packaging">Packaging</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="expense-note">Note</label>
+        <input id="expense-note" name="note" type="text" maxlength="80" placeholder="Optional note">
+
+        <label for="expense-date">Date</label>
+        <input id="expense-date" name="date" type="date" required>
+
+        <button class="primary-button" type="submit">Save expense</button>
+        <p id="expense-message" class="form-message" role="status"></p>
+      </form>
+
+      <article class="panel">
+        <div class="panel-heading">
+          <h2>Recent expenses</h2>
+          <strong id="total-expenses">GHC 0.00</strong>
+        </div>
+        <div id="expense-list" class="list-container">
+          <p class="empty-state">No expenses recorded yet.</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="coach-screen" class="screen">
+      <div class="screen-heading">
+        <p class="eyebrow">Your business helper</p>
+        <h2>Coach</h2>
+        <p class="muted-text">Practical tips based on your own sales.</p>
+      </div>
+
+      <article class="panel coach-highlight">
+        <span class="coach-icon">💡</span>
+        <div>
+          <h2 id="coach-headline">Your coach is ready</h2>
+          <p id="coach-summary" class="muted-text">Log some sales and I will find useful patterns.</p>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2>Tips for you</h2>
+        <div id="coach-tips" class="list-container">
+          <p class="empty-state">Tips will appear after you record sales.</p>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2>Where to sell at KNUST</h2>
+        <div id="location-ranking" class="list-container">
+          <p class="empty-state">Location rankings will appear after you record sales.</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="reports-screen" class="screen">
+      <div class="screen-heading">
+        <p class="eyebrow">See your progress</p>
+        <h2>Reports</h2>
+        <p class="muted-text">Review daily, weekly and all-time results.</p>
+      </div>
+
+      <div class="report-tabs">
+        <button class="report-tab active-report-tab" type="button" data-report="daily">Daily</button>
+        <button class="report-tab" type="button" data-report="weekly">Weekly</button>
+        <button class="report-tab" type="button" data-report="all-time">All-time</button>
+      </div>
+
+      <article class="panel">
+        <div id="report-summary" class="report-summary"></div>
+        <div class="chart-container">
+          <div id="report-chart" class="simple-chart"></div>
+        </div>
+        <button id="export-csv" class="secondary-button" type="button">Export to CSV</button>
+      </article>
+    </section>
+
+    <section id="settings-screen" class="screen">
+      <div class="screen-heading">
+        <p class="eyebrow">Make it yours</p>
+        <h2>Settings</h2>
+        <p class="muted-text">Change prices, targets and business rules.</p>
+      </div>
+
+      <form id="settings-form" class="form-card">
+        <label for="setting-box-cost">Box cost (GHC)</label>
+        <input id="setting-box-cost" name="boxCost" type="number" min="0" step="0.01" required>
+
+        <label for="setting-pieces-per-box">Pieces per box</label>
+        <input id="setting-pieces-per-box" name="piecesPerBox" type="number" min="1" required>
+
+        <label for="setting-price-per-piece">Selling price per piece (GHC)</label>
+        <input id="setting-price-per-piece" name="pricePerPiece" type="number" min="0" step="0.01" required>
+
+        <label for="setting-weekly-target">Weekly target (boxes)</label>
+        <input id="setting-weekly-target" name="weeklyTargetBoxes" type="number" min="1" required>
+
+        <label for="setting-daily-target">Daily target (pieces)</label>
+        <input id="setting-daily-target" name="dailyTargetPieces" type="number" min="1" required>
+
+        <label for="setting-expense-limit">Expense warning limit (GHC)</label>
+        <input id="setting-expense-limit" name="expenseLimit" type="number" min="0" step="0.01" required>
+
+        <h3>Profit split</h3>
+
+        <label for="setting-restock-percent">Restock percentage</label>
+        <input id="setting-restock-percent" name="restockPercent" type="number" min="0" max="100" required>
+
+        <label for="setting-savings-percent">Savings percentage</label>
+        <input id="setting-savings-percent" name="savingsPercent" type="number" min="0" max="100" required>
+
+        <label for="setting-personal-percent">Personal percentage</label>
+        <input id="setting-personal-percent" name="personalPercent" type="number" min="0" max="100" required>
+
+        <button class="primary-button" type="submit">Save settings</button>
+        <p id="settings-message" class="form-message" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-button active-nav-button" type="button" data-screen="home-screen">
+      <span>⌂</span>
+      <small>Home</small>
+    </button>
+    <button class="nav-button" type="button" data-screen="sell-screen">
+      <span>＋</span>
+      <small>Sell</small>
+    </button>
+    <button class="nav-button" type="button" data-screen="expenses-screen">
+      <span>₵</span>
+      <small>Expenses</small>
+    </button>
+    <button class="nav-button" type="button" data-screen="coach-screen">
+      <span>★</span>
+      <small>Coach</small>
+    </button>
+    <button class="nav-button" type="button" data-screen="reports-screen">
+      <span>▥</span>
+      <small>Reports</small>
+    </button>
+  </nav>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

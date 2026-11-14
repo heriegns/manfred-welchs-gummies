@@ -1,0 +1,29 @@
+.timer-card {
+  text-align: center;
+  background:
+    radial-gradient(circle at top right, rgba(255, 202, 58, 0.35), transparent 35%),
+    linear-gradient(145deg, var(--card), var(--card-strong));
+}
+
+.timer-display {
+  margin: 12px 0;
+  color: var(--primary-strong);
+  font-size: clamp(2.8rem, 14vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-card .form-card {
+  margin-top: 20px;
+  text-align: left;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.timer-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
